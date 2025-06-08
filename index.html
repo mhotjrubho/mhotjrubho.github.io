@@ -2,57 +2,105 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>הפרויקטים של מ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הפרויקטים שלי</title>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Heebo', sans-serif;
-      background: linear-gradient(to right, #f0f4f8, #d9e4f5);
+      background: linear-gradient(to right, #eef2f7, #dce6f3);
       color: #222;
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
       background: #1f3b73;
       color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
     header h1 {
+      font-size: 1.8rem;
       margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
     }
 
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.2rem;
-      opacity: 0.9;
+    nav {
+      display: flex;
+      gap: 1rem;
     }
 
-    main {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    nav a.active, nav a:hover {
+      background-color: #294c9f;
+    }
+
+    .container {
       max-width: 1200px;
       margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    .category-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .category-btn {
+      padding: 0.4rem 1rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .category-btn.active {
+      background: #1f3b73;
+      color: white;
+      border-color: #1f3b73;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
 
     .project-card {
       background: white;
       border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
     }
 
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .project-card img {
@@ -67,20 +115,20 @@
 
     .project-title {
       font-size: 1.3rem;
-      margin: 0 0 0.5rem;
       color: #1f3b73;
+      margin: 0;
     }
 
     .project-desc {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #555;
-      line-height: 1.5;
+      margin: 0.5rem 0;
     }
 
     .project-link {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
+      margin-top: 0.5rem;
+      padding: 0.4rem 1rem;
       background-color: #1f3b73;
       color: white;
       text-decoration: none;
@@ -92,63 +140,157 @@
       background-color: #294c9f;
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #e2e8f0;
+    .form-section {
       margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #555;
+      background: #ffffffcc;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
+    .form-section h2 {
+      margin-top: 0;
+      color: #1f3b73;
+    }
 
-      .project-desc {
-        font-size: 0.95rem;
-      }
+    .form-section input,
+    .form-section textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    .form-section button {
+      background-color: #1f3b73;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 1rem;
+      background: #e2e8f0;
+      color: #555;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>הפרויקטים שלי</h1>
-    <p>מבחר פרויקטים שבניתי – תהנו!</p>
-  </header>
+<header>
+  <h1>התיק עבודות שלי</h1>
+  <nav>
+    <a href="#" class="active">בית</a>
+    <a href="#">עליי</a>
+    <a href="#">צור קשר</a>
+  </nav>
+</header>
 
-  <main>
+<div class="container">
 
-    <!-- התחלת כרטיס פרויקט -->
-    <div class="project-card">
-      <img src="https://picsum.photos/600/400?random=1" alt="תמונה של פרויקט">
-      <div class="project-content">
-        <h3 class="project-title">שם הפרויקט</h3>
-        <p class="project-desc">תיאור קצר של הפרויקט. כאן תוכל לרשום כמה משפטים על מה הפרויקט עושה, מטרותיו, או כל מידע חשוב אחר.</p>
-        <a href="#" class="project-link" target="_blank">לצפייה בפרויקט</a>
-      </div>
-    </div>
-    <!-- סוף כרטיס פרויקט -->
+  <div class="category-bar">
+    <button class="category-btn active" onclick="filterProjects('all')">הכל</button>
+    <button class="category-btn" onclick="filterProjects('אתרים')">אתרים</button>
+    <button class="category-btn" onclick="filterProjects('אוטומציות')">אוטומציות</button>
+    <button class="category-btn" onclick="filterProjects('מערכות')">מערכות</button>
+  </div>
 
-    <!-- שכפל את הקטע לעוד פרויקטים -->
-    <div class="project-card">
-      <img src="https://picsum.photos/600/400?random=2" alt="תמונה של פרויקט">
-      <div class="project-content">
-        <h3 class="project-title">עוד פרויקט</h3>
-        <p class="project-desc">כאן תוכל להציג פרויקט נוסף שלך. פשוט שנה את התמונה, הכותרת, התיאור והקישור.</p>
-        <a href="#" class="project-link" target="_blank">לצפייה בפרויקט</a>
-      </div>
-    </div>
+  <div id="projectContainer" class="projects">
+    <!-- כאן יופיעו הפרויקטים -->
+  </div>
 
-    <!-- המשך לפי הצורך... -->
+  <div class="form-section">
+    <h2>הוסף פרויקט חדש</h2>
+    <input type="text" id="titleInput" placeholder="שם הפרויקט">
+    <input type="text" id="imgInput" placeholder="קישור לתמונה">
+    <textarea id="descInput" rows="3" placeholder="תיאור קצר"></textarea>
+    <input type="text" id="linkInput" placeholder="קישור לפרויקט">
+    <input type="text" id="categoryInput" placeholder="קטגוריה (למשל: אתרים)">
+    <button onclick="addProject()">הוסף</button>
+  </div>
 
-  </main>
+</div>
 
-  <footer>
-    נבנה באהבה על ידי מ. כל הזכויות שמורות © 2025
-  </footer>
+<footer>
+  נבנה באהבה על ידי מ. כל הזכויות שמורות © 2025
+</footer>
+
+<script>
+  const container = document.getElementById('projectContainer');
+
+  const defaultProjects = [
+    {
+      title: 'פרויקט דוגמה',
+      image: 'https://picsum.photos/600/400?random=10',
+      desc: 'זהו פרויקט לדוגמה. שנה את הפרטים כרצונך.',
+      link: '#',
+      category: 'אתרים'
+    },
+    {
+      title: 'מערכת ניהול',
+      image: 'https://picsum.photos/600/400?random=11',
+      desc: 'מערכת לניהול נתונים ודוחות.',
+      link: '#',
+      category: 'מערכות'
+    }
+  ];
+
+  function renderProjects(projects) {
+    container.innerHTML = '';
+    projects.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.setAttribute('data-category', p.category);
+
+      card.innerHTML = `
+        <img src="${p.image}" alt="תמונה של פרויקט">
+        <div class="project-content">
+          <h3 class="project-title">${p.title}</h3>
+          <p class="project-desc">${p.desc}</p>
+          <a href="${p.link}" class="project-link" target="_blank">לצפייה</a>
+        </div>`;
+      container.appendChild(card);
+    });
+  }
+
+  function addProject() {
+    const title = document.getElementById('titleInput').value;
+    const img = document.getElementById('imgInput').value;
+    const desc = document.getElementById('descInput').value;
+    const link = document.getElementById('linkInput').value;
+    const category = document.getElementById('categoryInput').value;
+
+    if (title && img && link) {
+      defaultProjects.push({ title, image: img, desc, link, category });
+      renderProjects(defaultProjects);
+      document.getElementById('titleInput').value = '';
+      document.getElementById('imgInput').value = '';
+      document.getElementById('descInput').value = '';
+      document.getElementById('linkInput').value = '';
+      document.getElementById('categoryInput').value = '';
+    }
+  }
+
+  function filterProjects(category) {
+    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (category === 'all') {
+      renderProjects(defaultProjects);
+    } else {
+      renderProjects(defaultProjects.filter(p => p.category === category));
+    }
+  }
+
+  // טען בהתחלה
+  renderProjects(defaultProjects);
+</script>
 
 </body>
 </html>
