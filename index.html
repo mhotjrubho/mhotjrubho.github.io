@@ -1,139 +1,270 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>הפרויקטים שלי</title>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;500;700&display=swap" rel="stylesheet" />
   <style>
-    /* (הסגנונות נשארו כפי ששלחת) */
-    /* ... */
+    /* עיצוב כללי */
+    body {
+      margin: 0;
+      font-family: 'Heebo', sans-serif;
+      direction: rtl;
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* כותרת עליונה */
+    header.main-header {
+      background-color: #0b7285;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header.main-header .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    header.main-header nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    header.main-header nav a:hover,
+    header.main-header nav a.active {
+      color: #c8f7ff;
+    }
+
+    /* מיכל תוכן */
+    main.container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* סרגל קטגוריות */
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .categories button {
+      background-color: #0b7285;
+      border: none;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .categories button:hover,
+    .categories button.active {
+      background-color: #087f8c;
+    }
+
+    /* גריד של פרויקטים */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgb(11 114 133 / 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgb(11 114 133 / 0.35);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .project-description {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      text-decoration: none;
+      background-color: #0b7285;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .project-link:hover {
+      background-color: #087f8c;
+    }
+
+    /* טופס צור קשר */
+    .contact-section {
+      padding: 4rem 1rem;
+      background: #f4f4f4;
+      text-align: center;
+      max-width: 600px;
+      margin: 3rem auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+    }
+
+    .contact-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #0b7285;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      direction: rtl;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background-color: #0b7285;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-weight: 600;
+    }
+
+    .contact-form button:hover {
+      background-color: #087f8c;
+    }
+
+    /* ריספונסיב */
+    @media (max-width: 600px) {
+      header.main-header {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .categories {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>התיק עבודות שלי</h1>
+<header class="main-header">
+  <div class="logo">הפרויקטים שלי</div>
   <nav>
-    <a href="#" class="active">בית</a>
-    <a href="#">עליי</a>
-    <a href="#">צור קשר</a>
+    <a href="index.html" class="active">בית</a>
+    <a href="about.html">אודות</a>
+    <a href="contact.html">צור קשר</a>
   </nav>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <div class="category-bar">
-    <button class="category-btn active" onclick="filterProjects('all')">הכל</button>
-    <button class="category-btn" onclick="filterProjects('אתרים')">אתרים</button>
-    <button class="category-btn" onclick="filterProjects('אוטומציות')">אוטומציות</button>
-    <button class="category-btn" onclick="filterProjects('מערכות')">מערכות</button>
+  <!-- סרגל קטגוריות (ניתן להוסיף פונקציונליות בעתיד) -->
+  <div class="categories">
+    <button class="active">הכל</button>
+    <button>אתר</button>
+    <button>אפליקציה</button>
+    <button>עיצוב</button>
   </div>
 
-  <div id="projectContainer" class="projects">
-    <!-- כאן יופיעו הפרויקטים -->
+  <!-- רשת פרויקטים -->
+  <div class="projects-grid">
+
+    <!-- דוגמה לפרויקט - תחליף בתוכן שלך -->
+    <div class="project-card">
+      <img class="project-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="פרויקט לדוגמה" />
+      <div class="project-content">
+        <h3 class="project-title">שם הפרויקט</h3>
+        <p class="project-description">תיאור קצר ומרגש של הפרויקט שלך, למה הוא מיוחד ומה הוא עושה.</p>
+        <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">קישור לפרויקט</a>
+      </div>
+    </div>
+
+    <!-- הוסף כאן עוד כרטיסי פרויקטים לפי הצורך -->
+
   </div>
 
-  <div class="form-section">
-    <h2>הוסף פרויקט חדש</h2>
-    <input type="text" id="titleInput" placeholder="שם הפרויקט">
-    <input type="text" id="imgInput" placeholder="קישור לתמונה">
-    <textarea id="descInput" rows="3" placeholder="תיאור קצר"></textarea>
-    <input type="text" id="linkInput" placeholder="קישור לפרויקט">
-    <input type="text" id="categoryInput" placeholder="קטגוריה (למשל: אתרים)">
-    <button onclick="addProject()">הוסף</button>
-  </div>
+  <!-- טופס צור קשר -->
+  <section id="contact" class="contact-section">
+    <h2>צור קשר</h2>
+    <form action="https://formsubmit.co/nho.tjrubho@gmail.com" method="POST" class="contact-form">
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="name" placeholder="שם מלא" required />
+      <input type="email" name="email" placeholder="כתובת אימייל" required />
+      <textarea name="message" placeholder="הודעה" rows="5" required></textarea>
+      <button type="submit">שלח</button>
+    </form>
+  </section>
 
-</div>
+</main>
 
-<footer>
-  נבנה באהבה על ידי מ. כל הזכויות שמורות © 2025
+<footer class="main-footer" style="background:#222; color:#fff; padding:1rem; text-align:center; margin-top:3rem;">
+  כל הזכויות שמורות © 2025
 </footer>
-
-<script>
-  const ownerPassword = "1234"; // שנה כאן את הסיסמה אם תרצה
-  const formSection = document.querySelector('.form-section');
-  formSection.style.display = "none"; // הסתרה כברירת מחדל
-
-  function askPassword() {
-    const entered = prompt("אנא הזן סיסמה לניהול:");
-    if (entered === ownerPassword) {
-      formSection.style.display = "block";
-    } else {
-      alert("סיסמה שגויה");
-    }
-  }
-
-  window.addEventListener('load', askPassword);
-
-  const container = document.getElementById('projectContainer');
-
-  const defaultProjects = [
-    {
-      title: 'פרויקט דוגמה',
-      image: 'https://picsum.photos/600/400?random=10',
-      desc: 'זהו פרויקט לדוגמה. שנה את הפרטים כרצונך.',
-      link: '#',
-      category: 'אתרים'
-    },
-    {
-      title: 'מערכת ניהול',
-      image: 'https://picsum.photos/600/400?random=11',
-      desc: 'מערכת לניהול נתונים ודוחות.',
-      link: '#',
-      category: 'מערכות'
-    }
-  ];
-
-  function renderProjects(projects) {
-    container.innerHTML = '';
-    projects.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'project-card';
-      card.setAttribute('data-category', p.category);
-
-      card.innerHTML = `
-        <img src="${p.image}" alt="תמונה של פרויקט">
-        <div class="project-content">
-          <h3 class="project-title">${p.title}</h3>
-          <p class="project-desc">${p.desc}</p>
-          <a href="${p.link}" class="project-link" target="_blank">לצפייה</a>
-        </div>`;
-      container.appendChild(card);
-    });
-  }
-
-  function addProject() {
-    const title = document.getElementById('titleInput').value;
-    const img = document.getElementById('imgInput').value;
-    const desc = document.getElementById('descInput').value;
-    const link = document.getElementById('linkInput').value;
-    const category = document.getElementById('categoryInput').value;
-
-    if (title && img && link) {
-      defaultProjects.push({ title, image: img, desc, link, category });
-      renderProjects(defaultProjects);
-      document.getElementById('titleInput').value = '';
-      document.getElementById('imgInput').value = '';
-      document.getElementById('descInput').value = '';
-      document.getElementById('linkInput').value = '';
-      document.getElementById('categoryInput').value = '';
-    }
-  }
-
-  function filterProjects(category) {
-    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-
-    if (category === 'all') {
-      renderProjects(defaultProjects);
-    } else {
-      renderProjects(defaultProjects.filter(p => p.category === category));
-    }
-  }
-
-  renderProjects(defaultProjects);
-</script>
 
 </body>
 </html>
